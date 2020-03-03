@@ -1,3 +1,4 @@
+//go:generate go run github.com/UnnoTed/fileb0x b0x.yaml
 package main
 
 import (
@@ -7,6 +8,8 @@ import (
 	"path/filepath"
 	"regexp"
 	"text/template"
+
+	"weblate2strings/embedded"
 
 	"github.com/alecthomas/kong"
 	"golang.org/x/text/language"
@@ -92,7 +95,10 @@ func (y *YamlCmd) Run(ctx *Context) error {
 		 outputFile, err := os.Create(outputFileName)
 		 check(err)
 
-		 tmpl := template.Must(template.ParseFiles("strings.tmpl"))
+		 tmplString, err := embedded.ReadFile("templates/strings.tmpl")
+		 check(err)
+
+		 tmpl := template.Must(template.New("Monkey C String Resource").Parse(string(tmplString)))
 
 		 err = tmpl.Execute(outputFile, weblateYaml[y.WeblateContext])
 		 check(err)

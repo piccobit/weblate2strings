@@ -2,3 +2,4 @@ weblate2strings
 .idea/
 bin/
 dist/
+embedded/

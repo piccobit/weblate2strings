@@ -29,7 +29,10 @@ type WeblateStrings map[string]string
 
 type WeblateYaml map[string]WeblateStrings
 
-var Version = "development"
+var version = "development"
+var commit = "-"
+var date = "-"
+var buildBy = "-"
 
 var cli struct {
 	Verbose bool `help:"Verbose mode."`
@@ -39,7 +42,10 @@ var cli struct {
 }
 
 func (v *VersionCmd) Run(ctx *Context) error {
-	fmt.Printf("Version: %s", Version)
+	fmt.Printf("Version: %s\n", version)
+	fmt.Printf("Commit: %s\n", commit)
+	fmt.Printf("Date: %s\n", date)
+	fmt.Printf("Build by: %s\n", buildBy)
 
 	return nil
 }
